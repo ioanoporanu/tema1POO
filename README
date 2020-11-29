@@ -1,0 +1,73 @@
+ README
+
+Git_link:  https://github.com/ioanoporanu/tema1POO.git
+
+ Am facut pentru fiecare dintre actiuni cate o clasa: Commands, Query si Recommendations.
+ In main, pentru fiecare tip de actiune am apelat metoda respectiva din commands sau query sau recomandations.
+ Actiunile se afla in package-ul actions.
+
+PENTRU COMMANDS:
+
+->Favorite: Am in clasa user o lista de stringuri care stocheaza numele videourilor favorite si tot aici o metoda favoriteAdd care adauga 
+in aceasta lista un video favorit, doar daca acesta nu se afla deja in ea si acesta se afla in history si afiseaza mesajele respective.
+In main iau comenzile din input si daca am comanda favorite aplic aceasta functie si ii scriu rezultatul in fisier. 
+
+->View: Am o metoda in clasa user addVideoHistory ce adauga un video in history, iar daca acesta se afla deja acolo creste numarul de vizualizari cu 1.
+In clasa commands am o metoda care gaseste user ul respectiv si apeleaza metoda addVideoHistory din acest user pentru titlul dat in actiunea din input, returnand mesajele ce trebuie scrise in fisier. 
+
+->Rating: Pentru aceasta pentru  clasele film si sezon dintr-un serial am adaugat o lista de double ce stocheaza ratingurile date. In clasa user am adaugat o lista de stringuri ratedVideos ce stocheaza videourile carora utilizatorul le-a mai dat rating. In clasa commands am o metoda addRating care verifica intai daca utilizatorul a fazut filmul si daca nu i-a dat rating, daca macar una nu este indeplinita nu adauga ratingul in lista de ratinguri a utulizatorului si returneaza mesajul respectiv, in main apelez aceasta functie pentru comenzile de acest tip.(pentru seriale concatenez numarul sezonului la numele serialului si astfel le identific). 
+
+
+
+PENTRU QUERY:
+
+--Aici am o metoda orderType care primind ca parametru o lista de obiecte sortata formeaza un string cu campurile nume ale primelor n  obiecte din acea lista , lista fiind inversata daca sortarea trebuie facut descendent si returneaza stringul.
+
+~Pentru actori:
+
+->Average: In clasa actors am o metoda care cauta toate filmele si serialele pentru un actor si face media ratingurilor acestora. In clasa query am o metoda sortActorsAverage care formeaza o lista cu obiecte pentru fiecare actor care contin un nume, un rating si un index irelevant(Am adaugat si un index pentru avea doar un tip de obiect argument pentru clasa comparator). Apoi sorteaza aceasta lista in functie de rating si nume  si returneaza rezultatul metodei order pentru aceasta lista. In main afisez rezultatul acestei metode. 
+
+->Awards: In clasa query am o metoda sortActorsAwards care pentru fiecare actor verifica daca acesta contine toate premiile date in comanda din input. Daca le contine, creeaza un obiect ce contine numele acestuia si numarul total de premii al acestuia si un rating irelevant. Apoi sortez aceasta lista in functie de nr de premii si nume . Apoi formez un string cu numele acestora sortati descrescator(folosind reverse pe lista) sau crescator in functie de ce se cere si returnez string-ul. In main apelez aceasta metoda.
+
+->FilterDescription: In clasa query am o metoda  sortActorsFilterDescription care pentru fiecare actor verifica daca in descrierea sa exista toate keywords-urile mentionate in comanda. Daca da, pentru fiecare creeaza un obiect cu numele acestui,un rating irelevant si un index irelevant. Sortez lista in functie de campul nume al obiectelor si returnez rezultatul metodei order aplicat pe lista.
+
+~Pentru video-uri
+
+->Rating: --Filme--In clasa query am o metoda moviesByRatingSeeker care pentru un film verifica daca are ratingul diferit de 0. Daca da creeaza un obiect cu numele acestuia , rating-ul acestuia si un index irelevant si il adauga intr-o lista data ca parametru. Tot in clasa query am o metoda sortMoviesByRating care in functie de filtre ( daca year e null este null, sau daca genre este null) cauta toate filmele ce se potrivesc filtrelor si aplica metoda moviesByRatingSeeker pentru acestea. Apoi se sorteaza lista in functie de rating si nume si se returneaza rezultatul functiei order pentru aceasta. 
+--Seriale--Pentru seriale am implementat identic ca la filme : 2 metode care fac aceleasi lucruri , doar ca pentru seriale.
+--In main apelez metodele corespunzatoare in functie de tipul obiectului : film sau serial.
+
+->Favorite: --Filme--In clasa query am o metoda moviesByFavoriteSeeker care cauta de cate ori apare un film in listele de favorite ale tuturor userilor si creeaza un obiect ce contine numele filmului si de cate ori apare acesta in listele de favorite cat si un rating irelevant, adaugand obiectul intr-o lista, daca acesta apare macar odata. Tot in query am metoda sortMoviesByFavorite care verifica daca filtrele sunt nule sau nu si in functie de acestea cauta filme in input si apeleaza metoda moviesByFavoriteSeeker pentru acestea. Apoi sorteaza acea lista in functie de nume si nr de aparitii si apeleaza metoda order returnand rezultatul acesteia.
+--Seriale--Pentru seriale am implementat identic ca la filme : 2 metode care fac aceleasi lucruri , doar ca pentru seriale.	
+--In main apelez metodele corespunzatoare in functie de tipul obiectului : film sau serial.
+
+
+->Longest: --Filme--In clasa query am o metoda moviesByDurationSeeker care cauta pentru un film durata sa. Formeaza un obiect cu numele acestuia si durata acestuia cat si un rating irelevant. Apoi mai am o metoda sortMoviesByDuration care pentru toate filmele care se potrivesc filtrelor aplica metoda moviesByDurationSeeker. Apoi sorteaza aceasta lista in functie de durata si nume si returneaza rezultatul metodei order aplicata pe lista.
+--Seriale--Pentru seriale am implementat identic ca la filme : 2 metode care fac aceleasi lucruri , doar ca pentru seriale.
+--In main apelez metodele corespunzatoare in functie de tipul obiectului : film sau serial.
+
+->Views: --Filme--In clasa query am o metoda moviesByViewsSeeker care cauta pentru un film numarul total de vizualizari. Formeaza un obiect cu numele acestuia si numarul total de vizualizari al acestuia cat si un rating irelevant si il adauga intr-o lista. Apoi mai am o metoda sortMoviesByViews care aplica moviesByViewsSeeker. Apoi sorteaza aceasta lista in functie de durata si nr de vizualizari si returneaza rezultatul metodei order aplicata pe lista.
+--Seriale--Pentru seriale am implementat identic ca la filme : 2 metode care fac aceleasi lucruri , doar ca pentru seriale.
+--In main apelez metodele corespunzatoare in functie de tipul obiectului : film sau serial.
+
+~Pentru utilizatori: 
+
+->Number of ratings: In clasa query am o metoda sortByUserRatingsNumber care pentru toti utilizatorii gaseste cate rating-uri au dat, creeaza un obiect cu numele acestora si numarul de rating-uri cat si un rating irelevant si il adauga intr-o lista. Apoi sorteaza lista dupa nr de rating-uri si nume  returneaza rezultatul metodei order aplicata pe lista. In main apelez aceasta metoda.
+
+
+PENTRU RRECOMMENDATIONS:
+
+->Standard: In clasa recommendations am o metoda standardRecommendation care parcurge mai intai fimele din baza de date apoi serialele din baza de date si verifica pentru un utilizator daca acesta le-a vazut. Aceasta metoda returneaza un string ce contine numele primului film sau serial gasit pe care utilizatorul nu l-a vazut. In main apelez aceasta metoda.
+
+->Bestunseen: In clasa recommendations am o metoda care parcurge pe rand toate filmele si serialele din baza de date si pentru fiecare creeaza un obiect cu indexul( cum apare in baza de date ) numele si rating-ul acestuia si adauga intr-o lista acest obiect, doar daca utilizatorul nu a mai avzut filmul sau serialul respectiv. Apoi se sorteaza lista in functie de rating si apoi de indice. La final metoda returneaza un string ce contine numele celui mai bun film. In main apelez aceasta metoda.
+
+->Popular: In clasa recommendations am o metoda popularRecommendation.In aceasta , mai intai , imi creez un hashmap unde stochez fiecare gen si cate filme sau seriale au acest gen. Acest lucru il realizez prin parcurgerea tuturor filmelor si serialelor in input. Apoi , iau pe rand din hashmap genul cel mai popular si il elimin din hasmap. Apoi caut in baza de date pe rand toate filmele , apoi toate serialele pana il gasesc pe primul pe care utulizatorul dat de comanda nu l-a vazut. Daca utilizatorul a vazut toate filmele si srialele din acest gen, trec si caut pentru urmatorul cel mai popular gen din hashmap si tot asa. Cand am gasit un film sau un serial din genul corespunzator pe care utilizatorul nu l-a avzut returnez un string ce contine numele acestuia. In main apelez aceasta metoda.
+
+->Favorite: Pentru fiecare film si serial din input , caut in toate listele de favorite ale tuturor utilizatorilor si numar de cate ori apare si salvez intr-un	obiect numele acestuia, de cate ori apare si indexul acestui(din baza de date)(doar daca utilizatorul nu l-a mai vizionat. Apoi il adaug intr-o lista si sortez lista dupa nr de aparitii si apoi dupa index. Apoi returnez un string ce contine numele filmului care se afla pe ultima pozitie in lista sortata. In main apelez aceasta metoda.
+
+->Search: Pentru un user, caut toate filmele si serialele din input care au un anumit gen si care nu apar in lista de vizionate a userului respectiv. Apoi creez un obiect ce contine numele si ratingul acestora si il adaug intr-o lista. Sortez lista dupa rating si nume si apoi creez un string ce contine toate campurile nume ale acestor obiecte in ordine crescataore si returnez acest string. In main apelez aceasta metoda.
+
+
+
+---Pe langa aceste clase , am mai creeat o clasa compareclasses ce contine un obiect NameDoubleInt cu 3 campuri un string un double si un int, ce serveste drept argument pentru functie compare din clasa comparator, pe care am folosit-o sa sortez listele. Apoi am mai creat inca 4 clase ce reprezinta implementari ale lui Comparator: SortByDoubleAndInt, SortByDoubleAndName, SortByIntAndName, SortByName. Fiecare dintre acestea sorteaza dupa cum sugereaza numele lor. Prima sorteaza intai dupa double apoi dupa int, a doua sorteaza intai dupa double apoi dupa name, a treia sorteaza intai dupa int apoi dupa   name si a patra sorteaza doar dupa name.
+
